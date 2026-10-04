@@ -45,7 +45,7 @@ Double-click `run_app.bat` inside this folder.
 ### 2. Manual CLI Launch
 ```bash
 # Navigate to this directory
-cd C:\Users\sulth\.gemini\antigravity\scratch\streamlit_resume_analyzer
+cd C:\Users\sulth\Documents\sulthan\sulthan\Sparkcv
 
 # Activate virtual environment
 .venv\Scripts\activate
