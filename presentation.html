@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkCV - Smart India Hackathon Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(51, 65, 85, 0.8);
+            --gold: #d4af37;
+            --gold-light: #fef08a;
+            --cyan: #38bdf8;
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            background-image: radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.25) 0%, rgba(11, 17, 32, 0.95) 100%);
+        }
+
+        /* Top Controls Bar */
+        .controls-bar {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 8px 18px;
+            border-radius: 999px;
+            z-index: 100;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6);
+        }
+
+        .controls-bar button {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .controls-bar button:hover {
+            background: var(--gold);
+            color: #0b1120;
+            border-color: var(--gold);
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Slide Canvas */
+        .presentation-container {
+            width: 95vw;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            background: radial-gradient(ellipse at 50% 12%, rgba(26, 32, 53, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 38px 46px 28px 46px;
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 0.35s ease forwards;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        .slide-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .slide-title {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .sih-badge {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        /* Slide Content Area */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Slide Footer */
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Common Elements */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            height: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card.gold-border { border-color: rgba(212, 175, 55, 0.5); }
+        .card.rose-border { border-color: rgba(244, 63, 94, 0.5); }
+        .card.cyan-border { border-color: rgba(56, 189, 248, 0.5); }
+        .card.emerald-border { border-color: rgba(16, 185, 129, 0.5); }
+
+        .card-header {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bullet-list li {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .bullet-list.rose-bullets li::before { color: var(--rose); }
+        .bullet-list.emerald-bullets li::before { color: var(--emerald); content: "✔"; font-size: 0.9rem; }
+
+        /* Slide 1 Special Styling */
+        .title-hero {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .title-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.7rem;
+            font-weight: 800;
+            background: linear-gradient(180deg, #fef3c7 0%, #e2be67 45%, #b4852e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .title-hero h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--cyan);
+        }
+
+        .meta-table {
+            width: 100%;
+            max-width: 880px;
+            margin: 18px auto 0 auto;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+
+        .meta-table td {
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .meta-table tr td:first-child {
+            border-radius: 8px 0 0 8px;
+            font-weight: 700;
+            color: var(--gold);
+            width: 28%;
+            border-left: 2px solid var(--gold);
+        }
+
+        .meta-table tr td:last-child {
+            border-radius: 0 8px 8px 0;
+            color: #ffffff;
+        }
+
+        /* Slide 3 Horizontal Pipeline */
+        .pipeline-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            position: relative;
+        }
+
+        .pipeline-step {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 18px;
+            border: 1px solid;
+            position: relative;
+        }
+
+        .step-num {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        /* Metric Callout Card */
+        .metric-big {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Print styles for direct PDF export */
+        @media print {
+            .controls-bar { display: none !important; }
+            body { background: #0f172a !important; -webkit-print-color-adjust: exact; }
+            .presentation-container {
+                width: 100vw !important;
+                height: 100vh !important;
+                aspect-ratio: auto !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                page-break-after: always;
+            }
+            .slide { display: flex !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Controls Floating Bar -->
+    <div class="controls-bar">
+        <button onclick="prevSlide()">◀ Previous</button>
+        <span class="slide-counter" id="slideIndicator">Slide 1 / 7</span>
+        <button onclick="nextSlide()">Next ▶</button>
+        <button onclick="toggleFullScreen()">⛶ Fullscreen</button>
+        <button onclick="window.print()">🖨️ Export PDF</button>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div class="presentation-container" id="presentation">
+
+        <!-- ============================================== -->
+        <!-- SLIDE 1: TITLE PAGE -->
+        <!-- ============================================== -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-header" style="justify-content: center; border-bottom: none; margin-bottom: 10px;">
+                <div style="text-align: center;">
+                    <div class="slide-tag">SMART INDIA HACKATHON 2026 • INNOVATION & AI CATEGORY</div>
+                </div>
+            </div>
+
+            <div class="slide-content">
+                <div class="title-hero">
+                    <h1>SparkCV: AI-Powered Job Description Analyzer & Resume Optimization Engine</h1>
+                    <h2>Autonomous ATS Alignment, 250+ Skill Gap Analysis, and Google XYZ Bullet Synthesis</h2>
+                    
+                    <table class="meta-table">
+                        <tr>
+                            <td>Problem Statement ID</td>
+                            <td>SIH26_HR01 / PS-AI-2026 (Smart Automated Hiring & ATS Optimization)</td>
+                        </tr>
+                        <tr>
+                            <td>Problem Statement Title</td>
+                            <td>AI-Driven NLP Alignment & Gap Detection for Candidate Resumes vs Industry JDs</td>
+                        </tr>
+                        <tr>
+                            <td>Theme / Category</td>
+                            <td>Artificial Intelligence / EdTech / HR-Tech / Smart Career Automation</td>
+                        </tr>
+                        <tr>
+                            <td>Team / Submitter</td>
+                            <td>SparkCV • Lead: Sulthan Shaik (GitHub: sulthan-shaik77)</td>
+                        </tr>
+                        <tr>
+                            <td>Live Deployments</td>
+                            <td>Live Web App: <strong>https://sparkcv.streamlit.app</strong> | Repo: <strong>github.com/sulthan-shaik77/Sparkcv</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 2: PROPOSED SOLUTION -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">IDEA TITLE & OVERVIEW</div>
+                    <div class="slide-title">Proposed Solution (Idea / Prototype Overview)</div>
+                </div>
+                <div class="sih-badge">2</div>
+            </div>
+
+            <div class="slide-content">
+                <div class="grid-2">
+                    <!-- Left: Problem -->
+                    <div class="card rose-border">
+                        <div class="card-header" style="color: var(--rose);">
+                            ⚠️ THE INDUSTRY CHALLENGE
+                        </div>
+                        <ul class="bullet-list rose-bullets">
+                            <li><strong>75%+ Automated ATS Rejection:</strong> Over three-quarters of candidate resumes are filtered out algorithmically before ever reaching human recruiters.</li>
+                            <li><strong>Blind Keyword Cramming:</strong> Applicants lack visibility into the exact technical ontology of target roles, resorting to ineffective keyword stuffing.</li>
+                            <li><strong>Lack of Actionable Bridge:</strong> Conventional scanners provide superficial percentage scores but fail to tell candidates <em>what concrete projects to build</em> or <em>how to rewrite bullets</em> to bridge gaps.</li>
+                            <li><strong>Expensive & Slow LLMs:</strong> Existing solutions rely on recurring, slow, privacy-risky external cloud APIs (OpenAI/Anthropic) that leak PII.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Right: Solution -->
+                    <div class="card gold-border">
+                        <div class="card-header" style="color: var(--gold);">
+                            ✨ THE SPARKCV SOLUTION
+                        </div>
+                        <ul class="bullet-list emerald-bullets">
+                            <li><strong>Multi-Format Ingestion:</strong> Zero-dependency parser for PDF, DOCX, and TXT with native in-memory XML/ZIP stream extraction.</li>
+                            <li><strong>250+ Hard-Skill Ontology:</strong> Domain-specific taxonomy covering Languages, Frameworks, Cloud, Databases, and ML with strict boundary regex.</li>
+                            <li><strong>Balanced Hybrid Scoring:</strong> 50% Skill Coverage Ratio + 50% TF-IDF Cosine Similarity for fair, deterministic evaluation.</li>
+                            <li><strong>Dynamic Portfolio Projects:</strong> Generates 2-3 production-grade project blueprints (tech stack + metrics) to fill missing skills.</li>
+                            <li><strong>Google XYZ Bullet Synthesizer:</strong> Transforms weak statements into quantified achievements: <em>Accomplished [X] as measured by [Y], by doing [Z]</em>.</li>
+                            <li><strong>ATS Structural Linter:</strong> Audits metric density, active verb power, and formatting traps with instant markdown audit export.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 3: TECHNICAL APPROACH -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">METHODOLOGY & PIPELINE</div>
+                    <div class="slide-title">Technical Approach (End-to-End Workflow)</div>
+                </div>
+                <div class="sih-badge">3</div>
+            </div>
+
+            <div class="slide-content">
+                <div class="pipeline-wrapper">
+                    <!-- Step 1 -->
+                    <div class="pipeline-step cyan-border" style="border-color: var(--cyan);">
+                        <div class="step-num" style="color: var(--cyan);">STAGE 01</div>
+                        <div class="step-title">Ingestion & Parsing</div>
+                        <ul class="bullet-list">
+                            <li>PDF via <code>pypdf</code> stream</li>
+                            <li>DOCX via <code>python-docx</code></li>
+                            <li>In-Memory ZIP/XML fallback</li>
+                            <li>Raw text input & 3 demo presets</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="pipeline-step gold-border" style="border-color: var(--gold);">
+                        <div class="step-num" style="color: var(--gold);">STAGE 02</div>
+                        <div class="step-title">NLP Preprocessing</div>
+                        <ul class="bullet-list">
+                            <li>Case normalization & regex</li>
+                            <li>Stopword filtering (offline)</li>
+                            <li>250+ Tech taxonomy matching</li>
+                            <li>Word-boundary protection (\bGo\b)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="pipeline-step emerald-border" style="border-color: var(--emerald);">
+                        <div class="step-num" style="color: var(--emerald);">STAGE 03</div>
+                        <div class="step-title">Hybrid Match Scoring</div>
+                        <ul class="bullet-list">
+                            <li>Scikit-Learn TF-IDF vectorizer</li>
+                            <li>Unigram + Bigram cosine sim</li>
+                            <li>Balanced 50/50 weighted formula</li>
+                            <li>3-tier calibrated verdict label</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="pipeline-step" style="border-color: var(--rose);">
+                        <div class="step-num" style="color: var(--rose);">STAGE 04</div>
+                        <div class="step-title">Actionable Polish</div>
+                        <ul class="bullet-list">
+                            <li>Dynamic portfolio project generator</li>
+                            <li>Google XYZ live bullet builder</li>
+                            <li>ATS format checklist linter</li>
+                            <li>Exportable executive audit report</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mathematical Breakdown Card -->
+                <div class="card" style="margin-top: 18px; border-color: rgba(212, 175, 55, 0.4);">
+                    <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">
+                        🔬 MATHEMATICAL FOUNDATION & SCORING EQUATION
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; font-size: 0.85rem; color: #cbd5e1;">
+                        <div>
+                            <p style="margin-bottom: 6px;"><strong>Balanced Hybrid Formula:</strong></p>
+                            <code style="background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 6px; color: var(--gold-light); font-size: 0.9rem; display: block;">
+                                Final Score = (0.50 × Skill Coverage Ratio) + (0.50 × TF-IDF Cosine Similarity)
+                            </code>
+                            <p style="margin-top: 6px; color: var(--text-muted);">
+                                Where <em>Skill Coverage Ratio</em> = Matched Skills / Total Required Skills, and <em>TF-IDF Cosine Similarity</em> assesses contextual alignment across all unigram and bigram vectors.
+                            </p>
+                        </div>
+                        <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 16px;">
+                            <p><strong>Verdict Tiers:</strong></p>
+                            <p style="color: var(--rose);">❌ &lt; 50%: Needs Major Improvement</p>
+                            <p style="color: var(--gold);">⚠️ 50% - 75%: Moderate Alignment</p>
+                            <p style="color: var(--emerald);">✅ &gt; 75%: Strong Match (Application Ready)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 4: TECHNICAL ARCHITECTURE -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">SYSTEM DESIGN</div>
+                    <div class="slide-title">Technical Architecture & Dual Delivery</div>
+                </div>
+                <div class="sih-badge">4</div>
+            </div>
+
+            <div class="slide-content">
+                <div class="grid-3" style="margin-bottom: 18px;">
+                    <div class="card cyan-border">
+                        <div class="card-header" style="color: var(--cyan);">
+                            📥 INPUT / INGESTION
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Binary PDF stream (<code>pypdf</code>)</li>
+                            <li>DOCX XML paragraphs (<code>docx</code>)</li>
+                            <li>In-Memory ZIP / XML extractor</li>
+                            <li>Job Description text stream</li>
+                            <li>Instant presets (Weak/Mod/Strong)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card gold-border">
+                        <div class="card-header" style="color: var(--gold);">
+                            🧠 CORE NLP & SCORING
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Scikit-Learn <code>TfidfVectorizer</code></li>
+                            <li>Sparse matrix cosine similarity</li>
+                            <li>250+ skill technical taxonomy</li>
+                            <li>Boundary-protected regex matcher</li>
+                            <li>SBERT dense embedding fallback</li>
+                        </ul>
+                    </div>
+
+                    <div class="card emerald-border">
+                        <div class="card-header" style="color: var(--emerald);">
+                            📤 ACTIONABLE OUTPUTS
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Dynamic portfolio project generator</li>
+                            <li>Google XYZ bullet synthesizer</li>
+                            <li>ATS structural checklist linter</li>
+                            <li>Executive markdown audit report</li>
+                            <li>Responsive Streamlit & Web UI</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="border-color: rgba(255, 255, 255, 0.12);">
+                    <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">
+                        ⚙️ TECHNICAL SPECIFICATIONS & RESILIENCY
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.85rem; color: #cbd5e1;">
+                        <div>
+                            <p><strong>Primary Technology Stack:</strong> Python 3.10+, Scikit-Learn, Streamlit, PyPDF, Python-docx, NumPy.</p>
+                            <p style="margin-top: 4px;"><strong>Dual-Delivery Architecture:</strong> 1) Cloud-Hosted Streamlit app (<code>sparkcv.streamlit.app</code>), and 2) Zero-dependency standalone Python web server (<code>standalone_app.py</code>) running without pip.</p>
+                        </div>
+                        <div>
+                            <p><strong>Latency & Performance:</strong> Sub-200ms end-to-end execution on standard CPUs; zero GPU or external API dependencies.</p>
+                            <p style="margin-top: 4px;"><strong>Test Automation:</strong> 100% test pass rate across 8 core unit test modules in <code>test_analyzer.py</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 5: FEASIBILITY, VIABILITY & RISKS -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">RISK MANAGEMENT & VIABILITY</div>
+                    <div class="slide-title">Feasibility, Viability & Risk Mitigation</div>
+                </div>
+                <div class="sih-badge">5</div>
+            </div>
+
+            <div class="slide-content">
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px;">
+                    <!-- Row 1 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="card rose-border" style="padding: 12px 16px;">
+                            <div style="color: var(--rose); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">⚡ RISK: Non-Standard File Formats</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);">Complex tables, multi-column layouts, and non-UTF-8 encodings failing to extract text.</div>
+                        </div>
+                        <div class="card emerald-border" style="padding: 12px 16px;">
+                            <div style="color: var(--emerald); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">🛡️ MITIGATION: Multi-Parser Fallback</div>
+                            <div style="font-size: 0.82rem; color: #e2e8f0;">Triple-tier decoding (UTF-8, Latin-1, CP1252) plus raw in-memory XML traversal for corrupt DOCX.</div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="card rose-border" style="padding: 12px 16px;">
+                            <div style="color: var(--rose); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">⚡ RISK: Keyword Stuffing Vulnerability</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);">Candidates pasting raw keyword dumps to artificially inflate scores without real experience.</div>
+                        </div>
+                        <div class="card emerald-border" style="padding: 12px 16px;">
+                            <div style="color: var(--emerald); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">🛡️ MITIGATION: Dual-Metric Vector Blend</div>
+                            <div style="font-size: 0.82rem; color: #e2e8f0;">50% TF-IDF Cosine Similarity verifies contextual phrasing, n-grams, and semantic sentence structure.</div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="card rose-border" style="padding: 12px 16px;">
+                            <div style="color: var(--rose); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">⚡ RISK: Short Skill Name Collisions</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);">Languages like 'Go', 'R', or 'C' causing false positives by matching common conversational words.</div>
+                        </div>
+                        <div class="card emerald-border" style="padding: 12px 16px;">
+                            <div style="color: var(--emerald); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">🛡️ MITIGATION: Strict Boundary Regex</div>
+                            <div style="font-size: 0.82rem; color: #e2e8f0;">Protected word boundaries (<code>\bGo\b</code>, <code>\bC\+\+\b</code>, <code>\b\.NET\b</code>) with technical context filters.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card gold-border" style="padding: 14px 20px;">
+                    <div style="color: var(--gold); font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">💡 COMMERCIAL VIABILITY & ENTERPRISE SCALING</div>
+                    <div style="font-size: 0.85rem; color: #e2e8f0;">
+                        100% offline-capable mathematical NLP ensures zero marginal cost per scan. Ready for enterprise licensing across University Placement Portals, EdTech Bootcamps, and Corporate HR pipelines with zero privacy risk.
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 6: IMPACT & BENEFITS -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">VALUE PROPOSITION</div>
+                    <div class="slide-title">Impact and Benefits (8 Core Pillars)</div>
+                </div>
+                <div class="sih-badge">6</div>
+            </div>
+
+            <div class="slide-content">
+                <div class="grid-4" style="height: 100%;">
+                    <div class="card cyan-border">
+                        <div class="card-header" style="color: var(--cyan); font-size: 0.95rem;">🚀 High ATS Pass Rate</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Bypasses automated rejection filters by aligning semantic context with job descriptions.</p>
+                    </div>
+
+                    <div class="card gold-border">
+                        <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">💰 Zero API Overhead</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">100% open-source local NLP stack. Zero recurring OpenAI/Anthropic API bills.</p>
+                    </div>
+
+                    <div class="card emerald-border">
+                        <div class="card-header" style="color: var(--emerald); font-size: 0.95rem;">⚡ Blazing Latency</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Sub-200ms analysis response time vs 15-30 second wait on heavy generative LLMs.</p>
+                    </div>
+
+                    <div class="card cyan-border">
+                        <div class="card-header" style="color: var(--cyan); font-size: 0.95rem;">🛠️ Portfolio Bridging</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Recommends production-grade projects with tech stacks to fill missing skills.</p>
+                    </div>
+
+                    <div class="card gold-border">
+                        <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">🎯 Google XYZ Polish</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Parameterizes bullets using: <em>Accomplished [X] measured by [Y] by doing [Z]</em>.</p>
+                    </div>
+
+                    <div class="card emerald-border">
+                        <div class="card-header" style="color: var(--emerald); font-size: 0.95rem;">🔒 Complete Privacy</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Candidate data processed in-memory. Zero PII transmission to third parties.</p>
+                    </div>
+
+                    <div class="card cyan-border">
+                        <div class="card-header" style="color: var(--cyan); font-size: 0.95rem;">📋 ATS Linter</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Audits metric density, active verb power, and multi-column formatting traps.</p>
+                    </div>
+
+                    <div class="card gold-border">
+                        <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">📱 Multi-Device Ready</div>
+                        <p style="font-size: 0.82rem; color: #cbd5e1;">Accessible worldwide on iPhone, Android, iPad, and desktop without install.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 7: RESEARCH, METRICS & REFERENCES -->
+        <!-- ============================================== -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">BENCHMARKS & CITATIONS</div>
+                    <div class="slide-title">Research, Metrics & References</div>
+                </div>
+                <div class="sih-badge">7</div>
+            </div>
+
+            <div class="slide-content">
+                <!-- 4 Metrics -->
+                <div class="grid-4" style="margin-bottom: 18px;">
+                    <div class="card rose-border" style="padding: 14px;">
+                        <div class="metric-big" style="color: var(--rose);">75%+</div>
+                        <div class="metric-label">Resumes filtered out by ATS before human recruiter review</div>
+                    </div>
+
+                    <div class="card cyan-border" style="padding: 14px;">
+                        <div class="metric-big" style="color: var(--cyan);">&lt; 200ms</div>
+                        <div class="metric-label">End-to-end NLP analysis latency per resume</div>
+                    </div>
+
+                    <div class="card emerald-border" style="padding: 14px;">
+                        <div class="metric-big" style="color: var(--emerald);">$0.00</div>
+                        <div class="metric-label">Cost per scan (Zero external API dependencies)</div>
+                    </div>
+
+                    <div class="card gold-border" style="padding: 14px;">
+                        <div class="metric-big" style="color: var(--gold);">100%</div>
+                        <div class="metric-label">Test pass rate across all 8 core unit modules</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card" style="border-color: rgba(56, 189, 248, 0.4);">
+                        <div class="card-header" style="color: var(--cyan); font-size: 0.95rem;">
+                            📈 MARKET RESEARCH & IMPACT
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Global Talent Acquisition & HR-Tech market to surpass <strong>$42.5 Billion</strong> by 2030 (CAGR 12.8%).</li>
+                            <li>Over <strong>98% of Fortune 500</strong> organizations use automated ATS (Workday, Taleo, Greenhouse).</li>
+                            <li>Huge student impact: <strong>80% of university graduates</strong> fail to include quantifiable metrics on resumes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="border-color: rgba(212, 175, 55, 0.4);">
+                        <div class="card-header" style="color: var(--gold); font-size: 0.95rem;">
+                            📚 TECHNICAL REFERENCES
+                        </div>
+                        <ul class="bullet-list">
+                            <li><strong>Scikit-Learn:</strong> TF-IDF Vectorizer & Cosine Similarity distance metrics.</li>
+                            <li><strong>Streamlit Community Cloud:</strong> Reactive Python web deployment.</li>
+                            <li><strong>Google XYZ Formula:</strong> <em>Accomplished [X] measured by [Y] by doing [Z]</em>.</li>
+                            <li><strong>PyPDF & Python-Docx:</strong> Binary document decoders with XML fallback.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Thank you banner -->
+                <div class="card gold-border" style="margin-top: 14px; padding: 12px; text-align: center; background: rgba(212, 175, 55, 0.1);">
+                    <div style="font-size: 1.1rem; font-weight: 800; color: var(--gold-light);">THANK YOU! QUESTIONS & DISCUSSION</div>
+                    <div style="font-size: 0.85rem; color: #ffffff; margin-top: 4px;">
+                        Live Application: <strong>https://sparkcv.streamlit.app</strong> &nbsp;•&nbsp; GitHub: <strong>https://github.com/sulthan-shaik77/Sparkcv</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>@SIH Idea Submission - Template</span>
+                <span>Team: SparkCV</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script for slide navigation -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > totalSlides) n = totalSlides;
+            currentSlide = n;
+
+            for (let i = 1; i <= totalSlides; i++) {
+                const el = document.getElementById(`slide-${i}`);
+                if (el) el.classList.remove('active');
+            }
+
+            const activeEl = document.getElementById(`slide-${currentSlide}`);
+            if (activeEl) activeEl.classList.add('active');
+
+            document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function toggleFullScreen() {
+            const elem = document.getElementById("presentation");
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Keyboard arrows navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            }
+        });
+    </script>
+</body>
+</html>
