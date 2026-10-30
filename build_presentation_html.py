@@ -454,44 +454,48 @@ html_content = f"""<!DOCTYPE html>
             <div class="slide-header">
                 <div>
                     <div class="slide-tag">MADANAPALLE INSTITUTE OF TECHNOLOGY & SCIENCE</div>
-                    <div class="slide-title">What I Learned: Machine Learning & NLP Concepts</div>
-                    <div class="slide-subtitle">Department of Computer Science and Engineering • Summer Internship-1, Review 1</div>
+                    <div class="slide-title">What I Learned: Machine Learning & NLP</div>
+                    <div class="slide-subtitle">Key Technical Skills Acquired During the 2-Month Internship at Slash Mark</div>
                 </div>
                 <div class="slide-badge">4</div>
             </div>
             <div class="slide-content">
-                <div class="grid-2" style="grid-template-rows: 1fr 1fr; gap: 14px;">
-                    <div class="card cyan-border" style="padding: 14px;">
-                        <div class="card-header" style="color: var(--cyan); font-size: 0.95rem; margin-bottom: 6px;">1. Data Ingestion & Preprocessing</div>
-                        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.4;">
-                            • Extracted raw text from PDF binary streams (<code>pypdf</code>) and Word documents (<code>python-docx</code>).<br>
-                            • Cleaned unstructured text: lowercasing, punctuation stripping, and stopword removal (NLTK) to remove non-informative noise.<br>
-                            • Handled edge-case symbols (e.g. C++, Go, .NET) using word-boundary regex patterns.
-                        </p>
+                <div class="grid-2" style="grid-template-rows: 1fr 1fr; gap: 16px;">
+                    <div class="card cyan-border" style="padding: 16px;">
+                        <div class="card-header" style="color: var(--cyan); font-size: 1rem; margin-bottom: 2px;">01. Data Preprocessing & NLP</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">Text Ingestion & Normalization</div>
+                        <ul class="bullet-list" style="font-size: 0.84rem;">
+                            <li>Extracted raw text from PDF & Word documents</li>
+                            <li>Cleaned text by removing stopwords, symbols & punctuation</li>
+                            <li>Handled special technical terms (C++, .NET, SQL) using regex</li>
+                        </ul>
                     </div>
-                    <div class="card gold-border" style="padding: 14px;">
-                        <div class="card-header" style="color: var(--gold); font-size: 0.95rem; margin-bottom: 6px;">2. Exploratory Data Analysis & Ontology</div>
-                        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.4;">
-                            • Built a curated 250+ skill ontology categorized into Languages, Web, Cloud, and AI.<br>
-                            • Structured skills into Backend, Frontend, DevOps, and Machine Learning domains.<br>
-                            • Implemented set-theoretic gap detection: (JD \\ Resume) to isolate exact missing candidate competencies.
-                        </p>
+                    <div class="card gold-border" style="padding: 16px;">
+                        <div class="card-header" style="color: var(--gold); font-size: 1rem; margin-bottom: 2px;">02. Skill Taxonomy & Gap Analysis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">Domain Categorization & Filtering</div>
+                        <ul class="bullet-list" style="font-size: 0.84rem;">
+                            <li>Curated a library of 250+ technical skills</li>
+                            <li>Grouped into Languages, AI/ML, Cloud & Databases</li>
+                            <li>Identified missing skills automatically using set-difference</li>
+                        </ul>
                     </div>
-                    <div class="card emerald-border" style="padding: 14px;">
-                        <div class="card-header" style="color: var(--emerald); font-size: 0.95rem; margin-bottom: 6px;">3. Feature Engineering (TF-IDF Vectorization)</div>
-                        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.4;">
-                            • Extracted unigrams and bigrams using Scikit-Learn's <code>TfidfVectorizer</code> to capture compound technical phrases.<br>
-                            • Applied Term Frequency - Inverse Document Frequency to prioritize rare technical skills over generic prose.<br>
-                            • Converted unstructured documents into normalized mathematical feature vectors.
-                        </p>
+                    <div class="card emerald-border" style="padding: 16px;">
+                        <div class="card-header" style="color: var(--emerald); font-size: 1rem; margin-bottom: 2px;">03. TF-IDF Feature Engineering</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">Word Importance & Vector Modeling</div>
+                        <ul class="bullet-list" style="font-size: 0.84rem;">
+                            <li>Converted textual resumes into numerical feature vectors</li>
+                            <li>Down-weighted common words; highlighted rare tech skills</li>
+                            <li>Captured both single keywords & 2-word phrases (bigrams)</li>
+                        </ul>
                     </div>
-                    <div class="card rose-border" style="padding: 14px;">
-                        <div class="card-header" style="color: var(--rose); font-size: 0.95rem; margin-bottom: 6px;">4. Mathematical Modeling & Evaluation</div>
-                        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.4;">
-                            • Computed vector alignment using Cosine Similarity: cos(θ) = (A · B) / (||A|| ||B||).<br>
-                            • Formulated a balanced hybrid equation: 50% Skill Coverage + 50% TF-IDF Cosine Distance.<br>
-                            • Validated with 8 automated unit tests and deployed live on Streamlit Cloud (<code>sparkcv.streamlit.app</code>).
-                        </p>
+                    <div class="card rose-border" style="padding: 16px;">
+                        <div class="card-header" style="color: var(--rose); font-size: 1rem; margin-bottom: 2px;">04. Cosine Similarity & Deployment</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">Mathematical Scoring & Cloud App</div>
+                        <ul class="bullet-list" style="font-size: 0.84rem;">
+                            <li>Calculated mathematical similarity score (0% to 100%)</li>
+                            <li>Balanced 50% skill match + 50% overall context match</li>
+                            <li>Built interactive web UI with Python and deployed on Streamlit</li>
+                        </ul>
                     </div>
                 </div>
             </div>
