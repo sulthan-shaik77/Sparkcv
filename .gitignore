@@ -44,3 +44,11 @@ desktop.ini
 
 # Streamlit run cache
 .streamlit/secrets.toml
+
+# Presentations & Slides (Private College Decks)
+*.pptx
+*.ppt
+presentation.html
+*presentation*.py
+
+
