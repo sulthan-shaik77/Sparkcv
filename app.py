@@ -247,6 +247,7 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "java": {"display": "Java", "category": "Programming Languages", "domain": "backend"},
     "c++": {"display": "C++", "category": "Programming Languages", "domain": "systems"},
     "c#": {"display": "C#", "category": "Programming Languages", "domain": "backend"},
+    "c": {"display": "C", "category": "Programming Languages", "domain": "systems"},
     "golang": {"display": "Go (Golang)", "category": "Programming Languages", "domain": "backend"},
     "go": {"display": "Go", "category": "Programming Languages", "domain": "backend"},
     "rust": {"display": "Rust", "category": "Programming Languages", "domain": "systems"},
@@ -256,7 +257,7 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "kotlin": {"display": "Kotlin", "category": "Programming Languages", "domain": "mobile"},
     "scala": {"display": "Scala", "category": "Programming Languages", "domain": "data_engineering"},
     "r": {"display": "R", "category": "Programming Languages", "domain": "data_science"},
-    "sql": {"display": "SQL", "category": "Databases & Query", "domain": "data_engineering"},
+    "sql": {"display": "SQL", "category": "Databases & Query", "domain": "database"},
     "bash": {"display": "Bash / Shell", "category": "DevOps & OS", "domain": "devops"},
     "html": {"display": "HTML5", "category": "Frontend", "domain": "frontend"},
     "css": {"display": "CSS3", "category": "Frontend", "domain": "frontend"},
@@ -274,6 +275,11 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "restful": {"display": "RESTful APIs", "category": "API & Networking", "domain": "backend"},
     "microservices": {"display": "Microservices", "category": "Architecture", "domain": "backend"},
     "celery": {"display": "Celery", "category": "Backend Tools", "domain": "backend"},
+    "full stack": {"display": "Full-Stack Development", "category": "Software Engineering", "domain": "backend"},
+    "full-stack": {"display": "Full-Stack Development", "category": "Software Engineering", "domain": "backend"},
+    "fullstack": {"display": "Full-Stack Development", "category": "Software Engineering", "domain": "backend"},
+    "web development": {"display": "Web Development", "category": "Software Engineering", "domain": "backend"},
+    "e-commerce": {"display": "E-Commerce Systems", "category": "Web Applications", "domain": "backend"},
 
     # Frontend Frameworks & Libraries
     "react": {"display": "React.js", "category": "Frontend Frameworks", "domain": "frontend"},
@@ -286,6 +292,8 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "redux": {"display": "Redux", "category": "Frontend State", "domain": "frontend"},
 
     # Data Science, ML & AI
+    "data science": {"display": "Data Science", "category": "Data Science & Analytics", "domain": "data_science"},
+    "data analysis": {"display": "Data Analysis", "category": "Data Science", "domain": "data_science"},
     "pandas": {"display": "Pandas", "category": "Data Science & ML", "domain": "data_science"},
     "numpy": {"display": "NumPy", "category": "Data Science & ML", "domain": "data_science"},
     "scikit-learn": {"display": "Scikit-Learn", "category": "Data Science & ML", "domain": "machine_learning"},
@@ -296,12 +304,26 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "xgboost": {"display": "XGBoost", "category": "Data Science & ML", "domain": "machine_learning"},
     "lightgbm": {"display": "LightGBM", "category": "Data Science & ML", "domain": "machine_learning"},
     "nlp": {"display": "NLP (Natural Language Processing)", "category": "Data Science & ML", "domain": "machine_learning"},
+    "natural language processing": {"display": "Natural Language Processing", "category": "NLP", "domain": "machine_learning"},
     "nltk": {"display": "NLTK", "category": "Data Science & ML", "domain": "machine_learning"},
     "spacy": {"display": "spaCy", "category": "Data Science & ML", "domain": "machine_learning"},
+    "named entity recognition": {"display": "Named Entity Recognition (NER)", "category": "NLP", "domain": "machine_learning"},
+    "ner": {"display": "NER (Named Entity Recognition)", "category": "NLP", "domain": "machine_learning"},
+    "keyword extraction": {"display": "Keyword Extraction", "category": "NLP", "domain": "machine_learning"},
+    "text analysis": {"display": "Text Analysis", "category": "NLP", "domain": "machine_learning"},
     "opencv": {"display": "OpenCV", "category": "Computer Vision", "domain": "machine_learning"},
+    "computer vision": {"display": "Computer Vision", "category": "Computer Vision", "domain": "machine_learning"},
+    "yolo": {"display": "YOLO (Object Detection)", "category": "Computer Vision", "domain": "machine_learning"},
+    "yolov5": {"display": "YOLOv5", "category": "Computer Vision", "domain": "machine_learning"},
+    "yolov8": {"display": "YOLOv8", "category": "Computer Vision", "domain": "machine_learning"},
+    "object detection": {"display": "Object Detection", "category": "Computer Vision", "domain": "machine_learning"},
+    "image processing": {"display": "Image Processing", "category": "Computer Vision", "domain": "machine_learning"},
+    "airsim": {"display": "AirSim (Autonomous Simulation)", "category": "Robotics & Simulation", "domain": "machine_learning"},
+    "folium": {"display": "Folium (Geospatial Mapping)", "category": "Data Visualization & GIS", "domain": "data_science"},
+    "geospatial": {"display": "Geospatial Analysis", "category": "Data Science", "domain": "data_science"},
+    "autonomous navigation": {"display": "Autonomous Navigation", "category": "Robotics & AI", "domain": "machine_learning"},
     "deep learning": {"display": "Deep Learning", "category": "AI / ML Concepts", "domain": "machine_learning"},
     "machine learning": {"display": "Machine Learning", "category": "AI / ML Concepts", "domain": "machine_learning"},
-    "data analysis": {"display": "Data Analysis", "category": "Data Science", "domain": "data_science"},
     "matplotlib": {"display": "Matplotlib", "category": "Data Visualization", "domain": "data_science"},
     "seaborn": {"display": "Seaborn", "category": "Data Visualization", "domain": "data_science"},
     "plotly": {"display": "Plotly", "category": "Data Visualization", "domain": "data_science"},
@@ -310,8 +332,53 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "llms": {"display": "Large Language Models (LLMs)", "category": "GenAI & LLMs", "domain": "gen_ai"},
     "langchain": {"display": "LangChain", "category": "GenAI & LLMs", "domain": "gen_ai"},
     "rag": {"display": "RAG (Retrieval-Augmented Generation)", "category": "GenAI & LLMs", "domain": "gen_ai"},
+    "generative ai": {"display": "Generative AI", "category": "GenAI & LLMs", "domain": "gen_ai"},
+    "genai": {"display": "Generative AI", "category": "GenAI & LLMs", "domain": "gen_ai"},
     "beautifulsoup": {"display": "BeautifulSoup", "category": "Web Scraping", "domain": "backend"},
     "selenium": {"display": "Selenium", "category": "Web Automation", "domain": "backend"},
+
+    # Operating Systems & Cybersecurity
+    "linux": {"display": "Linux", "category": "Operating Systems", "domain": "devops"},
+    "kali linux": {"display": "Kali Linux", "category": "Cybersecurity & OS", "domain": "cybersecurity"},
+    "kali": {"display": "Kali Linux", "category": "Cybersecurity & OS", "domain": "cybersecurity"},
+    "windows": {"display": "Windows", "category": "Operating Systems", "domain": "general"},
+    "cybersecurity": {"display": "Cybersecurity", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "cyber security": {"display": "Cybersecurity", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "penetration testing": {"display": "Penetration Testing", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "ethical hacking": {"display": "Ethical Hacking", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "wireshark": {"display": "Wireshark", "category": "Cybersecurity & Networking", "domain": "cybersecurity"},
+    "nmap": {"display": "Nmap", "category": "Cybersecurity & Networking", "domain": "cybersecurity"},
+    "metasploit": {"display": "Metasploit", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "burp suite": {"display": "Burp Suite", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "firewalls": {"display": "Firewalls", "category": "Cybersecurity & Networking", "domain": "cybersecurity"},
+    "cryptography": {"display": "Cryptography", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "reverse engineering": {"display": "Reverse Engineering", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "soc": {"display": "SOC (Security Operations Center)", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "siem": {"display": "SIEM", "category": "Cybersecurity", "domain": "cybersecurity"},
+    "owasp": {"display": "OWASP", "category": "Cybersecurity", "domain": "cybersecurity"},
+
+    # Electronics, Hardware & VLSI
+    "vlsi": {"display": "VLSI Design", "category": "Electronics & Hardware", "domain": "electronics"},
+    "electronics": {"display": "Electronics", "category": "Electronics & Hardware", "domain": "electronics"},
+    "electronic": {"display": "Electronics", "category": "Electronics & Hardware", "domain": "electronics"},
+    "electrnoics": {"display": "Electronics", "category": "Electronics & Hardware", "domain": "electronics"},
+    "eletrnoic": {"display": "Electronics", "category": "Electronics & Hardware", "domain": "electronics"},
+    "eletrnoics": {"display": "Electronics", "category": "Electronics & Hardware", "domain": "electronics"},
+    "embedded systems": {"display": "Embedded Systems", "category": "Embedded Systems", "domain": "electronics"},
+    "embedded c": {"display": "Embedded C", "category": "Embedded Systems", "domain": "electronics"},
+    "microcontroller": {"display": "Microcontrollers", "category": "Embedded Systems", "domain": "electronics"},
+    "microcontrollers": {"display": "Microcontrollers", "category": "Embedded Systems", "domain": "electronics"},
+    "verilog": {"display": "Verilog", "category": "VLSI & Hardware Description", "domain": "electronics"},
+    "systemverilog": {"display": "SystemVerilog", "category": "VLSI & Hardware Description", "domain": "electronics"},
+    "vhdl": {"display": "VHDL", "category": "VLSI & Hardware Description", "domain": "electronics"},
+    "fpga": {"display": "FPGA", "category": "VLSI & Hardware", "domain": "electronics"},
+    "asic": {"display": "ASIC Design", "category": "VLSI & Hardware", "domain": "electronics"},
+    "matlab": {"display": "MATLAB", "category": "Simulation & Scientific Computing", "domain": "electronics"},
+    "simulink": {"display": "Simulink", "category": "Simulation & Modeling", "domain": "electronics"},
+    "arduino": {"display": "Arduino", "category": "Embedded Systems & IoT", "domain": "electronics"},
+    "raspberry pi": {"display": "Raspberry Pi", "category": "Embedded Systems & IoT", "domain": "electronics"},
+    "pcb design": {"display": "PCB Design", "category": "Hardware Design", "domain": "electronics"},
+    "cadence": {"display": "Cadence EDA", "category": "VLSI Design Tools", "domain": "electronics"},
 
     # Databases & Big Data
     "postgresql": {"display": "PostgreSQL", "category": "Databases", "domain": "database"},
@@ -337,7 +404,6 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
     "ci/cd": {"display": "CI/CD Pipelines", "category": "DevOps", "domain": "devops"},
     "jenkins": {"display": "Jenkins", "category": "DevOps", "domain": "devops"},
     "github actions": {"display": "GitHub Actions", "category": "DevOps", "domain": "devops"},
-    "linux": {"display": "Linux", "category": "Operating Systems", "domain": "devops"},
     "git": {"display": "Git Version Control", "category": "Developer Tools", "domain": "devops"},
 
     # Software Engineering Practices
@@ -351,6 +417,22 @@ TECHNICAL_SKILLS_TAXONOMY: Dict[str, Dict[str, any]] = {
 
 # Pre-packaged Project Recommendations by Domain
 DOMAIN_PROJECT_TEMPLATES = {
+        "cybersecurity": [
+        {
+            "title": "Automated Penetration Testing & Vulnerability Scanner with Python & Kali Linux",
+            "desc": "Architect an automated reconnaissance and port auditing framework using Python, Nmap, and Wireshark on Kali Linux to detect security misconfigurations and CVE vulnerabilities.",
+            "tech_stack": ["Python", "Kali Linux", "Nmap", "Wireshark", "Cybersecurity"],
+            "key_metric": "Reduced network security audit turnaround time by 80% with automated CVE reporting."
+        }
+    ],
+    "electronics": [
+        {
+            "title": "FPGA-Based Hardware Digital Signal Processor with Verilog & VLSI Architecture",
+            "desc": "Design and synthesize an optimized hardware arithmetic pipeline using Verilog HDL on FPGA. Perform timing analysis, logic minimization, and gate-level verification using Cadence EDA tools.",
+            "tech_stack": ["Verilog", "VLSI", "FPGA", "Electronics", "ModelSim"],
+            "key_metric": "Achieved 40% reduction in clock propagation delay with zero timing violations."
+        }
+    ],
     "backend": [
         {
             "title": "High-Performance Asynchronous REST API with FastAPI & PostgreSQL",
@@ -490,21 +572,62 @@ def clean_text(raw_text: str) -> str:
 
 
 def extract_skills_from_text(text: str) -> Set[str]:
-    """Identify technical skills and tools from text using boundary matching."""
+    """Identify technical skills and tools from text using boundary matching, typo-resilience, and canonical aliases."""
+    if not text:
+        return set()
+
     text_lower = " " + text.lower() + " "
-    # Normalize common symbols
+    # Normalize common symbols & punctuation
     text_lower = text_lower.replace("/", " ").replace(",", " ").replace(";", " ")
-    
+
+    # Typo resilience mapping for common OCR / text variations
+    typo_map = {
+        r'\beletrnoic\b': 'electronic',
+        r'\beletrnoics\b': 'electronics',
+        r'\belectrnoics\b': 'electronics',
+        r'\bknowlied\s*e\b': 'knowledge',
+        r'\bdisriptionn\b': 'description',
+        r'\bskikls\b': 'skills',
+        r'\bfullstack\b': 'full stack',
+        r'\bfull-stack\b': 'full stack'
+    }
+    for pat, repl in typo_map.items():
+        text_lower = re.sub(pat, repl, text_lower)
+
+    # Sort keys by length descending to match multi-word phrases first (e.g. 'kali linux' before 'linux')
+    sorted_keys = sorted(TECHNICAL_SKILLS_TAXONOMY.keys(), key=len, reverse=True)
+
     found_skills = set()
-    for skill_key in TECHNICAL_SKILLS_TAXONOMY:
-        # Match using word boundaries or regex for terms with symbols like c++, c#, .net
+    for skill_key in sorted_keys:
         escaped_key = re.escape(skill_key)
-        # Handle word boundary or bounded by spaces/punctuation
         pattern = rf'(?:\b|(?<=\s)){escaped_key}(?=\b|(?=\s))'
         if re.search(pattern, text_lower):
             found_skills.add(skill_key)
-            
-    return found_skills
+
+    # Normalize alias equivalents to canonical skills
+    canonical_skills = set()
+    alias_map = {
+        "kali": "kali linux",
+        "fullstack": "full stack",
+        "full-stack": "full stack",
+        "electronic": "electronics",
+        "eletrnoic": "electronics",
+        "eletrnoics": "electronics",
+        "electrnoics": "electronics",
+        "cyber security": "cybersecurity",
+        "natural language processing": "nlp"
+    }
+    for s in found_skills:
+        canonical = alias_map.get(s, s)
+        canonical_skills.add(canonical)
+
+    # YOLO family alias equivalence
+    if "yolov5" in canonical_skills or "yolov8" in canonical_skills:
+        canonical_skills.add("yolo")
+    if "yolo" in canonical_skills:
+        canonical_skills.add("yolov5")
+
+    return canonical_skills
 
 
 def extract_tfidf_salient_keywords(jd_text: str, top_n: int = 25) -> List[Tuple[str, float]]:
@@ -576,19 +699,24 @@ def calculate_match_metrics(resume_text: str, jd_text: str, engine: str = "tfidf
             except Exception:
                 cosine_sim = 0.0
 
-    # 3. Calibrated Skill Coverage Ratio
-    # Benchmark matches 68% of listed tools to represent 100% target coverage
+    # 3. Transparent and Accurate Skill Coverage Ratio
+    # Honest real-world percentage: exactly what percentage of required tools the candidate matches
     if len(jd_skills) > 0:
         raw_skill_ratio = len(matched_skills) / len(jd_skills)
-        target_benchmark = len(jd_skills) if len(jd_skills) < 4 else max(4, len(jd_skills) * 0.68)
-        skill_coverage = min(len(matched_skills) / target_benchmark, 1.0)
+        skill_coverage = raw_skill_ratio
     else:
         raw_skill_ratio = cosine_sim
         skill_coverage = cosine_sim
 
-    # 4. Final Balanced Match Score (Weighted blend: 65% Skill Coverage, 35% Semantic Sim)
-    scaled_cosine = min(cosine_sim * 1.35, 1.0)
-    final_score_raw = (0.65 * skill_coverage + 0.35 * scaled_cosine) * 100
+    # 4. Final Balanced Match Score (Weighted blend: 60% Skill Coverage, 40% Semantic Context)
+    scaled_cosine = min(cosine_sim * 1.6, 1.0)
+    final_score_raw = (0.70 * skill_coverage + 0.30 * scaled_cosine) * 100
+
+    # Critical Integrity Rule:
+    # If ANY skills explicitly required in the JD are missing, the overall score can NEVER be 100%!
+    if len(missing_skills) > 0:
+        final_score_raw = min(final_score_raw, 95.0)
+
     final_score = min(max(round(final_score_raw, 1), 0.0), 100.0)
 
     # 5. Extract Salient TF-IDF Keywords from JD
@@ -1062,9 +1190,10 @@ Passionate Software Developer with 3+ years of hands-on experience building back
 
 Technical Skills:
 - Languages: Python, SQL, JavaScript, HTML, CSS
-- Web & APIs: Flask, REST API, Microservices
+- Web & APIs: FastAPI, Flask, REST API, Microservices
 - Databases: PostgreSQL, SQLite, MySQL
-- Developer Tools: Docker, Git, Linux, Postman
+- Data Science & ML: Pandas, NumPy, Scikit-Learn, Data Analysis, Matplotlib, BeautifulSoup
+- Cloud & DevOps: AWS, Docker, Git, Linux, CI/CD
 - Practices: Agile, Scrum, Unit Testing
 
 Professional Experience:
